@@ -100,14 +100,14 @@ export const updateEmployee = async (req, res) => {
 
     const { name, department, isactive, employementtype } = req.body;
 
-    const isactiveValue = isactive === "true" ? true : false;
+    // const isactiveValue = isactive === "true" ? true : false;
 
     const updatedEmployee = await Employee.findByIdAndUpdate(
       { _id: id },
       {
         name,
         department,
-        isactive: isactiveValue,
+        isactive: isactive,
         employementtype: employementtype,
       },
       { new: true }
