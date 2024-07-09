@@ -3,6 +3,16 @@ import Employee from "../models/employee.models.js";
 export const createEmployee = async (req, res) => {
   try {
     const { employeeId, name, department, DOB } = req.body;
+
+    const employee = await Employee.findOne({ employeeid: employeeId });
+
+    if (employee) {
+      return res.status(400).json({
+        success: false,
+        message: "Employee Id already exists. Use another employee Id",
+      });
+    }
+
     const newEmployee = await Employee.create({
       employeeid: employeeId,
       name,
