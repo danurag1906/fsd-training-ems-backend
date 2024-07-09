@@ -35,13 +35,16 @@ export const createEmployee = async (req, res) => {
 export const getEmployees = async (req, res) => {
   try {
     let employees;
-    const { department } = req.body;
+    let sortFactor;
+    const { department } = req.query;
+    const { asc } = req.query;
+    sortFactor = asc === "true" ? 1 : -1;
     if (department && department.length > 0) {
       employees = await Employee.find({ department: department }).sort({
-        employeeid: -1,
+        employeeid: sortFactor,
       });
     } else {
-      employees = await Employee.find().sort({ employeeid: -1 });
+      employees = await Employee.find().sort({ employeeid: sortFactor });
     }
 
     return res.status(200).json({

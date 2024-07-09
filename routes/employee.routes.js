@@ -11,7 +11,7 @@ import {
 const router = express.Router();
 
 router.post("/createEmployee", createEmployee);
-router.post("/fetchAllEmployees", getEmployees);
+// router.post("/fetchAllEmployees", getEmployees);
 router.get("/fetchAllEmployees", getEmployees);
 router.get("/fetchEmployeeById/:id", getEmployeeById);
 router.post("/fetchEmployeeByName", getEmployeeByName);
