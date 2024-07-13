@@ -1,22 +1,28 @@
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from "uuid"; // Install uuid package for generating unique IDs
 
 const employeeSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
   },
   employeeid: {
     type: String,
-    required: true,
     unique: true,
+    default: uuidv4, // Auto-generate unique ID if not provided
   },
   department: {
     type: String,
-    required: true,
+    enum: ["IT", "HR", "Finance", "Sales", "Marketing", "Others"],
+    default: "Others",
   },
   dob: {
     type: Date,
-    required: true,
   },
   isactive: {
     type: Boolean,
@@ -24,9 +30,13 @@ const employeeSchema = new mongoose.Schema({
   },
   employementtype: {
     type: String,
-    required: true,
     default: "fulltime",
     enum: ["fulltime", "parttime", "contract"],
+  },
+  role: {
+    type: String,
+    default: "normal",
+    enum: ["superadmin", "admin", "normal"],
   },
 });
 
